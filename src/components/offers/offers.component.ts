@@ -1,6 +1,5 @@
 import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
 import { Offer } from 'src/offer/offer';
 import { OfferService } from 'src/offer/offer.service';
 
@@ -11,7 +10,7 @@ import { OfferService } from 'src/offer/offer.service';
 })
 export class OffersComponent implements OnInit {
   offers: Offer[] = [];
-  constructor(private offerService: OfferService, private http: HttpClient,public router:Router) {}
+  constructor(private offerService: OfferService, private http: HttpClient) {}
 
   ngOnInit(): void {
     this.http
