@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
-import { Offer } from 'src/offer/offer';
-import { OfferService } from 'src/offer/offer.service';
+import { Offer } from 'src/services/offer/offer';
+import { OfferService } from 'src/services/offer/offer.service';
 
 @Component({
   selector: 'app-offers',
@@ -13,6 +13,7 @@ export class OffersComponent implements OnInit {
   constructor(private offerService: OfferService, private http: HttpClient) {}
 
   ngOnInit(): void {
+    this.offerService.clearOffers();
     this.http
       .get<[]>('http://localhost:8080/offers')
       .forEach((offer) => {

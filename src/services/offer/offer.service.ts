@@ -29,4 +29,8 @@ export class OfferService {
   getOffers() {
     return this.offers;
   }
+
+  clearOffers() {
+    this.offers = [];
+  }
 }

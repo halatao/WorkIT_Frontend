@@ -1,5 +1,5 @@
-import { Category } from 'src/model/category';
-import { Location } from 'src/model/location';
+import { Category } from 'src/services/category/category';
+import { Location } from 'src/services/location/location';
 import { Response } from 'src/model/response';
 import { User } from 'src/model/user';
 

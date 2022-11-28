@@ -1,7 +1,7 @@
 <mat-card class="inline-block">
   <form [formGroup]="addOfferForm" (ngSubmit)="postOffer()" class="form">
-    <mat-form-field class="form-element" appearance="fill">
-      <mat-label>Position name</mat-label>
+    <div>
+      <label>Position name</label>
       <input
         matInput
         type="text"
@@ -9,6 +9,47 @@
         placeholder="Position name"
         formControlName="name"
       />
-    </mat-form-field>
+    </div>
+    <div>
+      <label>Salary minimal</label>
+      <input
+        matInput
+        type="number"
+        id="salaryLowest"
+        formControlName="salaryLowest"
+        min="0"
+        value="20000"
+      />
+    </div>
+    <div>
+      <label>Salary maximal</label>
+      <input
+        matInput
+        type="number"
+        id="salaryHighest"
+        formControlName="salaryHighest"
+        min="0"
+        value="20000"
+      />
+    </div>
+    <div>
+      <label>Location</label>
+      <select formControlName="location">
+        <option *ngFor="let location of locations" [value]="location.id">
+          {{ location.name }}
+        </option>
+      </select>
+    </div>
+    <div>
+      <label>Category</label>
+      <select formControlName="category">
+        <option *ngFor="let category of categories" [value]="category.id">
+          {{ category.name }}
+        </option>
+      </select>
+    </div>
+    <div>
+      <button type="submit">Submit</button>
+    </div>
   </form>
 </mat-card>
