@@ -10,7 +10,7 @@ export class CategoryService {
 
   setCategories(categories: any[]) {
     categories.forEach((category) => {
-      this.categories.push(new Category(category.id, category.name));
+      this.categories.push(new Category(category.categoryId, category.categoryName));
     });
   }
 

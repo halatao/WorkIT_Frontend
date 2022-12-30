@@ -11,7 +11,7 @@ export class LocationService {
   setLocations(locations:any[]){
     this.locations=[];
     locations.forEach((location)=>{
-      this.locations.push(new Location(location.id,location.name));
+      this.locations.push(new Location(location.locationId,location.locationName));
     });
   }
 

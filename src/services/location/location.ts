@@ -1,9 +1,9 @@
 export class Location {
-  id: number;
-  name: string;
+  locationId: number;
+  locationName: string;
 
   constructor(id: number, name: string) {
-    this.id = id;
-    this.name = name;
+    this.locationId = id;
+    this.locationName = name;
   }
 }

@@ -6,6 +6,7 @@ import { User } from 'src/model/user';
 export class Offer {
   id: number;
   name: string;
+  description: string;
   salaryLowest: number;
   salaryHighest: number;
   location: Location;
@@ -16,6 +17,7 @@ export class Offer {
   constructor(
     id: number,
     name: string,
+    description: string,
     salaryLowest: number,
     salaryHighest: number,
     location: Location,
@@ -25,6 +27,7 @@ export class Offer {
   ) {
     this.id = id;
     this.name = name;
+    this.description = description;
     this.salaryLowest = salaryLowest;
     this.salaryHighest = salaryHighest;
     this.location = location;

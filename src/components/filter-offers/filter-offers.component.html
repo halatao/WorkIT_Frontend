@@ -1,0 +1,56 @@
+<mat-card class="form">
+  <form [formGroup]="filterOfferForm">
+    <div class="inline">
+      <mat-slider
+        thumbLabel
+        [displayWith]="formatLabel"
+        tickInterval="1000"
+        step="1000"
+        min="0"
+        max="200000"
+        aria-label="units"
+        formControlName="salaryMin"
+        class="input-full-width"
+        (valueChange)="updateLable()"
+      ></mat-slider>
+      <mat-label>Minimal salary: {{ salaryLowest }} Kč</mat-label>
+    </div>
+    <div class="margin">
+      <div class="inline">
+        <mat-form-field appearance="fill">
+          <mat-label>Location</mat-label>
+          <mat-select multiple formControlName="location">
+            <mat-option
+              *ngFor="let location of locations"
+              [value]="location.locationId"
+              >{{ location.locationName }}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+      </div>
+      <div class="inline">
+        <mat-form-field appearance="fill">
+          <mat-label>Category</mat-label>
+          <mat-select multiple formControlName="category">
+            <mat-option
+              *ngFor="let category of categories"
+              [value]="category.categoryId"
+              >{{ category.categoryName }}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+      </div>
+    </div>
+
+    <div>
+      <button
+        mat-raised-button
+        color="primary"
+        (click)="filterOffers()"
+        [routerLink]="'/offers'"
+      >
+        Show
+      </button>
+    </div>
+  </form>
+</mat-card>

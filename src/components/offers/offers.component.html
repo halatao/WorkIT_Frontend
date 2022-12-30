@@ -1,11 +1,11 @@
 <div class="offer_list" *ngFor="let offer of offers">
-  <div class="offer_frame" [routerLink]="'/offer'">
+  <div class="offer_frame" [routerLink]="'/offers/'+offer.id+''">
     <div>
       <h2>{{ offer.name }}</h2>
     </div>
     <div>
       <p>{{ offer.salaryLowest + " - " + offer.salaryHighest +" Kč"}}</p>
-      <p>{{ offer.location.name }}</p>
+      <p>{{ offer.location.locationName }}</p>
     </div>
   </div>
 </div>

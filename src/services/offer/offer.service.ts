@@ -1,11 +1,14 @@
 import { Injectable } from '@angular/core';
+import { Filter } from 'src/model/Filter';
 import { Offer } from './offer';
+import { HttpClient } from '@angular/common/http';
 
 @Injectable({
   providedIn: 'root',
 })
 export class OfferService {
   offers: Offer[] = [];
+  filter: Filter = new Filter(0, [], []);
   constructor() {}
 
   setOffers(offers: any[]) {
@@ -13,10 +16,11 @@ export class OfferService {
     offers.forEach((offer) => {
       this.offers.push(
         new Offer(
-          offer.id,
-          offer.name,
-          offer.salaryLowest,
-          offer.salaryHighest,
+          offer.offerId,
+          offer.offerName,
+          offer.offerDescription,
+          offer.salaryMin,
+          offer.salaryMax,
           offer.location,
           offer.category,
           offer.user,
@@ -26,11 +30,19 @@ export class OfferService {
     });
   }
 
+  setFilter(filter: Filter) {
+    this.filter = filter;
+  }
+
   getOffers() {
     return this.offers;
   }
 
   clearOffers() {
     this.offers = [];
+  }
+
+  getFilter() {
+    return this.filter;
   }
 }

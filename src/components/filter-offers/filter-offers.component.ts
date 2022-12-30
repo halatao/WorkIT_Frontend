@@ -1,32 +1,33 @@
 import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
-import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { LocationService } from 'src/services/location/location.service';
 import { Location } from 'src/services/location/location';
 import { Category } from 'src/services/category/category';
 import { CategoryService } from 'src/services/category/category.service';
-import { PostOffer } from 'src/model/postOffer';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { Filter } from 'src/model/Filter';
+import { OfferService } from 'src/services/offer/offer.service';
 
 @Component({
-  selector: 'app-add-offer',
-  templateUrl: './add-offer.component.html',
-  styleUrls: ['./add-offer.component.css'],
+  selector: 'app-filter-offers',
+  templateUrl: './filter-offers.component.html',
+  styleUrls: ['./filter-offers.component.css'],
 })
-export class AddOfferComponent implements OnInit {
+export class FilterOffersComponent implements OnInit {
   locations: Location[] = [];
   categories: Category[] = [];
-  addOfferForm: FormGroup = new FormGroup({
-    name: new FormControl('', Validators.required),
-    salaryLowest: new FormControl(0),
-    salaryHighest: new FormControl(0),
-    category: new FormControl('', Validators.required),
-    location: new FormControl('', Validators.required),
+  salaryLowest: string = '0';
+  filterOfferForm: FormGroup = new FormGroup({
+    salaryMin: new FormControl(0),
+    category: new FormControl([]),
+    location: new FormControl([]),
   });
 
   constructor(
     private http: HttpClient,
     private locationService: LocationService,
-    private categoryService: CategoryService
+    private categoryService: CategoryService,
+    private offerService: OfferService
   ) {}
 
   ngOnInit(): void {
@@ -48,23 +49,29 @@ export class AddOfferComponent implements OnInit {
         this.categories = this.categoryService.getCategories();
       });
   }
-  postOffer() {
-    let value = this.addOfferForm.value;
-    let name = value.name;
-    let salaryLowest = value.salaryLowest;
-    let salaryHighest = value.salaryHighest;
+  filterOffers() {
+    let value = this.filterOfferForm.value;
     let location = value.location;
     let category = value.category;
-    let offer = new PostOffer(
-      name,
-      salaryLowest,
-      salaryHighest,
-      location,
-      category,
-      1
-    );
-    const url = 'http://localhost:8080/offers';
-    this.http.post<PostOffer>(url, offer).subscribe((response:any)=>{console.log(response);
-    });
+    let salaryMin = value.salaryMin;
+    console.log(location);
+    console.log(category);
+    console.log(salaryMin);
+
+    let filter = new Filter(salaryMin, location, category);
+
+    this.offerService.setFilter(filter);
+  }
+  formatLabel(value: number): string {
+    if (value >= 1000) {
+      return Math.round(value / 1000) + '.000' + 'Kč';
+    }
+    return `${value}`;
+  }
+  updateLable(){
+    let ret = this.filterOfferForm.value.salaryMin;
+    this.salaryLowest=ret;
+    console.log(ret);
+    
   }
 }
