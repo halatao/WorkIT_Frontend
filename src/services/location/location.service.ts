@@ -8,10 +8,12 @@ export class LocationService {
   locations: Location[] = [];
   constructor() {}
 
-  setLocations(locations:any[]){
-    this.locations=[];
-    locations.forEach((location)=>{
-      this.locations.push(new Location(location.locationId,location.locationName));
+  setLocations(locations: any[]) {
+    this.locations = [];
+    locations.forEach((location) => {
+      this.locations.push(
+        new Location(location.locationId, location.locationName)
+      );
     });
   }
 

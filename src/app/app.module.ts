@@ -13,6 +13,8 @@ import { FilterOffersComponent } from 'src/components/filter-offers/filter-offer
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MatNativeDateModule } from '@angular/material/core';
 import { MaterialModule } from './mat-module';
+import { AuthComponent } from 'src/components/auth/auth.component';
+import { AccountComponent } from 'src/components/account/account.component';
 
 @NgModule({
   declarations: [
@@ -21,6 +23,8 @@ import { MaterialModule } from './mat-module';
     SelectedOfferComponent,
     AddOfferComponent,
     FilterOffersComponent,
+    AuthComponent,
+    AccountComponent
   ],
   imports: [
     BrowserModule,

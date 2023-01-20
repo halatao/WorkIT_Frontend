@@ -19,7 +19,6 @@ export class OffersComponent implements OnInit {
     this.http.post<Filter>(url, filter).subscribe((response: any) => {
       this.offerService.setOffers(response);
       this.offers = this.offerService.getOffers();
-      console.log(this.offers);
     });
   }
 }

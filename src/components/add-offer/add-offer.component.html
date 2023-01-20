@@ -35,7 +35,10 @@
     <div>
       <label>Location</label>
       <select formControlName="location">
-        <option *ngFor="let location of locations" [value]="location.locationId">
+        <option
+          *ngFor="let location of locations"
+          [value]="location.locationId"
+        >
           {{ location.locationName }}
         </option>
       </select>
@@ -43,7 +46,10 @@
     <div>
       <label>Category</label>
       <select formControlName="category">
-        <option *ngFor="let category of categories" [value]="category.categoryId">
+        <option
+          *ngFor="let category of categories"
+          [value]="category.categoryId"
+        >
           {{ category.categoryName }}
         </option>
       </select>

@@ -1,4 +1,38 @@
-<h1>{{selectedOffer.name}}</h1>
-<h2>{{selectedOffer.salaryLowest}} - {{selectedOffer.salaryHighest}}Kč</h2>
-<h3>{{selectedOffer.location.locationName}}</h3>
-<p>{{selectedOffer.description}}</p>
+<h1>{{ selectedOffer.name }}</h1>
+<h2>{{ selectedOffer.salaryLowest }} - {{ selectedOffer.salaryHighest }}Kč</h2>
+<h3>{{ selectedOffer.location.locationName }}</h3>
+<p>{{ selectedOffer.description }}</p>
+<div *ngIf="this.userService.logged">
+  <mat-card class="form">
+    <form [formGroup]="replyForm">
+      <div>
+        <label>Position name</label>
+        <input
+          matInput
+          type="text"
+          id="reply"
+          placeholder="Reply message"
+          formControlName="reply"
+        />
+      </div>
+      <div>
+        <label>Position name</label>
+        <input
+          matInput
+          type="text"
+          id="cv"
+          placeholder="Your CV"
+          formControlName="cv"
+        />
+      </div>
+      <div>
+        <button mat-raised-button color="primary" (click)="submitReply()">
+          Send reply
+        </button>
+      </div>
+    </form>
+  </mat-card>
+</div>
+<div *ngIf="!this.userService.logged">
+  <mat-label>You have to login for reply</mat-label>
+</div>

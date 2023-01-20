@@ -4,7 +4,7 @@ import { LocationService } from 'src/services/location/location.service';
 import { Location } from 'src/services/location/location';
 import { Category } from 'src/services/category/category';
 import { CategoryService } from 'src/services/category/category.service';
-import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { FormControl, FormGroup } from '@angular/forms';
 import { Filter } from 'src/model/Filter';
 import { OfferService } from 'src/services/offer/offer.service';
 
@@ -38,7 +38,6 @@ export class FilterOffersComponent implements OnInit {
       })
       .then(() => {
         this.locations = this.locationService.getLocations();
-        console.log(this.locations);
       });
     this.http
       .get<[]>('https://localhost:7003/api/Categories/All')
@@ -54,9 +53,6 @@ export class FilterOffersComponent implements OnInit {
     let location = value.location;
     let category = value.category;
     let salaryMin = value.salaryMin;
-    console.log(location);
-    console.log(category);
-    console.log(salaryMin);
 
     let filter = new Filter(salaryMin, location, category);
 
@@ -68,10 +64,8 @@ export class FilterOffersComponent implements OnInit {
     }
     return `${value}`;
   }
-  updateLable(){
+  updateLable() {
     let ret = this.filterOfferForm.value.salaryMin;
-    this.salaryLowest=ret;
-    console.log(ret);
-    
+    this.salaryLowest = ret;
   }
 }

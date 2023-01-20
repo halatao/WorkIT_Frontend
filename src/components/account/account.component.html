@@ -1,0 +1,11 @@
+<div>
+  <div [routerLink]="''" class="inline">WorkIT - Your IT jobs listing page</div>
+  <div class="inline right-align">
+    <div *ngIf="!this.userService.logged" [routerLink]="'/auth'" class="inline">
+      Login
+    </div>
+    <div *ngIf="this.userService.logged">
+      {{ this.userService.user.username }}
+    </div>
+  </div>
+</div>

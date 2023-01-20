@@ -1,7 +1,7 @@
 import { Category } from 'src/services/category/category';
 import { Location } from 'src/services/location/location';
 import { Response } from 'src/model/response';
-import { User } from 'src/model/user';
+import { User } from 'src/services/user/user';
 
 export class Offer {
   id: number;
