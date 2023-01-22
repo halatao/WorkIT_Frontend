@@ -1,0 +1,17 @@
+<div>
+  <div *ngIf="this.role == 'user'">
+    <div *ngFor="let reply of replies">
+      {{ reply }}
+    </div>
+  </div>
+  <div *ngIf="this.role == 'recruiter'">
+    <div *ngFor="let offer of offers">
+      <div [routerLink]="'/offer/' + offer.offerId">
+        {{ offer }}
+      </div>
+    </div>
+  </div>
+  <div *ngIf="this.role == 'admin'">
+    Admin page
+  </div>
+</div>

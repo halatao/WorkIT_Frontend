@@ -9,8 +9,11 @@ export class CategoryService {
   constructor() {}
 
   setCategories(categories: any[]) {
+    this.clearCategories();
     categories.forEach((category) => {
-      this.categories.push(new Category(category.categoryId, category.categoryName));
+      this.categories.push(
+        new Category(category.categoryId, category.categoryName)
+      );
     });
   }
 

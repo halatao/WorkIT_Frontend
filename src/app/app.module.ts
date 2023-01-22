@@ -15,6 +15,7 @@ import { MatNativeDateModule } from '@angular/material/core';
 import { MaterialModule } from './mat-module';
 import { AuthComponent } from 'src/components/auth/auth.component';
 import { AccountComponent } from 'src/components/account/account.component';
+import { ProfileComponent } from 'src/components/profile/profile.component';
 
 @NgModule({
   declarations: [
@@ -24,7 +25,8 @@ import { AccountComponent } from 'src/components/account/account.component';
     AddOfferComponent,
     FilterOffersComponent,
     AuthComponent,
-    AccountComponent
+    AccountComponent,
+    ProfileComponent,
   ],
   imports: [
     BrowserModule,

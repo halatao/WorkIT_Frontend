@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Filter } from 'src/model/Filter';
+import { Filter } from 'src/model/filter';
 import { Offer } from './offer';
 import { HttpClient } from '@angular/common/http';
 

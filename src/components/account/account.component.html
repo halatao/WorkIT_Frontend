@@ -4,8 +4,13 @@
     <div *ngIf="!this.userService.logged" [routerLink]="'/auth'" class="inline">
       Login
     </div>
-    <div *ngIf="this.userService.logged">
-      {{ this.userService.user.username }}
+    <div *ngIf="this.userService.logged" [routerLink]="'/profile'">
+      <div>
+        {{ this.userService.user.username }}
+      </div>
+      <div>
+        <button (click)="logout()">Logout</button>
+      </div>
     </div>
   </div>
 </div>

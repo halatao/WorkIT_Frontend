@@ -9,7 +9,7 @@ export class LocationService {
   constructor() {}
 
   setLocations(locations: any[]) {
-    this.locations = [];
+    this.clearLocations();
     locations.forEach((location) => {
       this.locations.push(
         new Location(location.locationId, location.locationName)

@@ -1,10 +1,11 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { FormControl, FormGroup } from '@angular/forms';
 import { Offer } from 'src/services/offer/offer';
 import { UserService } from 'src/services/user/user.service';
 import { PostReply } from 'src/model/postReply';
+import { ResponseService } from 'src/services/response/response.service';
 
 @Component({
   selector: 'app-selected-offer',
@@ -14,16 +15,20 @@ import { PostReply } from 'src/model/postReply';
 export class SelectedOfferComponent implements OnInit {
   selectedOffer: Offer = <Offer>{};
   replyFormVisible: boolean = false;
+  responses: any[] = [];
+  selectedResponse: any = <any>{};
+  selectedResponseActive: boolean = false;
   param: number = 0;
   replyForm: FormGroup = new FormGroup({
     reply: new FormControl(''),
     cv: new FormControl(''),
   });
-
   constructor(
     private route: ActivatedRoute,
     private http: HttpClient,
-    public userService: UserService
+    public userService: UserService,
+    public response: ResponseService,
+    private router: Router
   ) {}
 
   ngOnInit(): void {
@@ -36,6 +41,19 @@ export class SelectedOfferComponent implements OnInit {
       let url = 'https://localhost:7003/api/Offers/ById?offerId=' + this.param;
       this.http.get(url).subscribe((res) => {
         this.setOffer(res);
+      });
+    }
+    if (this.userService.user.role.name == 'recruiter') {
+      let header = {
+        headers: new HttpHeaders().set(
+          'Authorization',
+          'Bearer ' + this.userService.jwt
+        ),
+      };
+      let url =
+        'https://localhost:7003/api/Responses/ByOffer?offerId=' + this.param;
+      this.http.get<any[]>(url, header).subscribe((res) => {
+        this.setResponses(res);
       });
     }
   }
@@ -52,6 +70,18 @@ export class SelectedOfferComponent implements OnInit {
       offer.reponses
     );
   }
+  setResponses(responses: any[]) {
+    this.responses = [];
+    responses.forEach((response) => {
+      this.responses.push(response);
+    });
+  }
+
+  setResponse(i: number) {
+    this.selectedResponse = this.responses.find((q) => q.responseId == i);
+    this.selectedResponseActive = true;
+    console.log(this.selectedResponse);
+  }
 
   submitReply() {
     let value = this.replyForm.value;
@@ -64,7 +94,6 @@ export class SelectedOfferComponent implements OnInit {
       this.userService.user.id,
       this.param
     );
-    console.log(postReply);
 
     const url = 'https://localhost:7003/api/Responses/Create';
     let header = {
@@ -73,15 +102,17 @@ export class SelectedOfferComponent implements OnInit {
         'Bearer ' + this.userService.jwt
       ),
     };
-    this.http
-      .post<PostReply>(url, postReply, header)
-      .subscribe((response: any) => {
-        console.log(response);
-      });
+    this.http.post<PostReply>(url, postReply, header).subscribe(
+      (response: any) => {},
+      (error: any) => {
+        if (error.status == 401) {
+          this.router.navigate(['/auth']);
+        }
+      }
+    );
   }
 
   replyFormToggle() {
     this.replyFormVisible = !this.replyForm;
-    console.log('tog');
   }
 }

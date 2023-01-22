@@ -6,6 +6,7 @@ import { Location } from 'src/services/location/location';
 import { Category } from 'src/services/category/category';
 import { CategoryService } from 'src/services/category/category.service';
 import { PostOffer } from 'src/model/postOffer';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-add-offer',
@@ -26,7 +27,8 @@ export class AddOfferComponent implements OnInit {
   constructor(
     private http: HttpClient,
     private locationService: LocationService,
-    private categoryService: CategoryService
+    private categoryService: CategoryService,
+    private router:Router
   ) {}
 
   ngOnInit(): void {
@@ -63,8 +65,16 @@ export class AddOfferComponent implements OnInit {
       category,
       1
     );
-    const url = 'http://localhost:8080/offers';
-    this.http.post<PostOffer>(url, offer).subscribe((response:any)=>{console.log(response);
-    });
+    const url = 'https://localhost:7003/api/Offers/Create';
+    this.http.post<PostOffer>(url, offer).subscribe(
+      (response: any) => {
+        console.log(response);
+      },
+      (error: any) => {
+        if (error.status == 401) {
+          this.router.navigate(['/auth']);
+        }
+      }
+    );
   }
 }

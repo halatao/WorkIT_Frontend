@@ -1,10 +1,11 @@
-import { HttpClient,HttpHeaders } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { UserService } from 'src/services/user/user.service';
 import { PostAuth } from 'src/model/postAuth';
 import { Location } from '@angular/common';
 import { User } from 'src/services/user/user';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-auth',
@@ -32,7 +33,8 @@ export class AuthComponent implements OnInit {
   constructor(
     private userService: UserService,
     private http: HttpClient,
-    private location: Location
+    private location: Location,
+    private router: Router
   ) {
     this.register = false;
     this.authLabel = this.reg;
@@ -59,6 +61,9 @@ export class AuthComponent implements OnInit {
           this.location.back();
         },
         (error: any) => {
+          if (error.status == 401) {
+            this.router.navigate(['/auth']);
+          }
           this.errMessage = error.error;
         }
       );
@@ -76,8 +81,6 @@ export class AuthComponent implements OnInit {
           (response: any) => {
             this.userService.jwt = response;
             this.fetchUser(value.username);
-            this.userService.toggleTrue();
-            this.location.back();
           },
           (error: any) => {
             this.errMessage = error.error;
@@ -95,7 +98,7 @@ export class AuthComponent implements OnInit {
         'Bearer ' + this.userService.jwt
       ),
     };
-    this.http.get<User>(url,header).subscribe(
+    this.http.get<User>(url, header).subscribe(
       (response: any) => {
         let user = new User(
           response.userId,
@@ -105,8 +108,14 @@ export class AuthComponent implements OnInit {
           response.responses
         );
         this.userService.user = user;
+        this.userService.setJwtCookie();
+        this.userService.toggleTrue();
+        this.location.back();
       },
       (error: any) => {
+        if (error.status == 401) {
+          this.location.go('/auth');
+        }
         console.log(error);
       }
     );
