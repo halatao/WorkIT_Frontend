@@ -1,5 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
+import { OfferService } from 'src/services/offer/offer.service';
 import { UserService } from 'src/services/user/user.service';
 
 @Component({
@@ -11,19 +12,22 @@ export class ProfileComponent implements OnInit {
   replies: any[] = [];
   offers: any[] = [];
   role: string = '';
-  showAddOffer: boolean = false;
-  constructor(private userService: UserService) {}
+  constructor(
+    private userService: UserService,
+    public offerService: OfferService
+  ) {}
 
   ngOnInit(): void {
     this.role = this.userService.user.role.name;
     if (this.role == 'user') {
       this.replies = this.userService.user.responses;
+      
     } else if (this.role == 'recruiter') {
       this.offers = this.userService.user.offers;
     }
   }
 
   toggleAddOffer() {
-    this.showAddOffer = !this.showAddOffer;
+    this.offerService.addOfferForm = !this.offerService.addOfferForm;
   }
 }

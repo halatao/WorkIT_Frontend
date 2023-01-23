@@ -1,14 +1,24 @@
-<div class="offer_list font-white" *ngFor="let offer of offers">
-  <div class="offer_frame as-link" [routerLink]="'/offers/' + offer.id + ''">
-    <div>
-      <h2>{{ offer.name }}</h2>
-    </div>
-    <div>
-      <div *ngIf="offer.salaryHighest == 0">Částka neuvedena</div>
-      <div *ngIf="offer.salaryHighest > 0">
-        {{ offer.salaryLowest }} - {{ offer.salaryHighest }}Kč
+<div>
+  <div *ngIf="offers.length == 0" class="font-white text-center mt">
+    No results
+  </div>
+  <div *ngIf="offers.length > 0">
+    <div class="offer_list font-white" *ngFor="let offer of offers">
+      <div
+        class="offer_frame as-link"
+        [routerLink]="'/offers/' + offer.id + ''"
+      >
+        <div>
+          <h2>{{ offer.name }}</h2>
+        </div>
+        <div>
+          <div *ngIf="offer.salaryHighest == 0">Salary not specified</div>
+          <div *ngIf="offer.salaryHighest > 0">
+            {{ offer.salaryLowest }} - {{ offer.salaryHighest }}Kč
+          </div>
+          <p>{{ offer.location.locationName }}</p>
+        </div>
       </div>
-      <p>{{ offer.location.locationName }}</p>
     </div>
   </div>
 </div>

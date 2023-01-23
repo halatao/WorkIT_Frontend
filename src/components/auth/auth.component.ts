@@ -28,6 +28,7 @@ export class AuthComponent implements OnInit {
     username: new FormControl('', Validators.required),
     password: new FormControl('', Validators.required),
     password2: new FormControl('', Validators.required),
+    role: new FormControl(false),
   });
 
   constructor(
@@ -50,7 +51,15 @@ export class AuthComponent implements OnInit {
       return;
     }
     let value = this.authForm.value;
-    let auth = new PostAuth(value.username, value.password, 'admin');
+    let role = '';
+    if (value.role) {
+      role = 'recruiter';
+    } else {
+      role = 'user';
+    }
+    console.log(role);
+
+    let auth = new PostAuth(value.username, value.password, role);
     if (this.register) {
       const url = 'https://localhost:7003/api/Users/Create';
       this.http.post(url, auth, { responseType: 'text' }).subscribe(

@@ -34,6 +34,10 @@
           />
         </mat-form-field>
       </div>
+      <div *ngIf="register" class="spacing">
+        <mat-label>Recruiter account</mat-label>
+        <mat-checkbox formControlName="role"></mat-checkbox>
+      </div>
       <div>
         {{ errMessage }}
       </div>

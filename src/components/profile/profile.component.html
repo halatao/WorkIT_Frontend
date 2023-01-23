@@ -1,22 +1,39 @@
 <div class="center">
   <div *ngIf="this.role == 'user'">
-    <div *ngFor="let reply of replies">
-      {{ reply }}
+    <div class="font-white sub-headline mt">Your responses</div>
+    <div *ngIf="replies.length == 0" class="mt-5">
+      <div class="font-white sub-headline mt">Your responses</div>
+    </div>
+    <div *ngIf="replies.length > 0" class="mt-5">
+      <div
+        *ngFor="let reply of replies"
+        class="font-white as-link"
+        [routerLink]="'/offers/' + reply.offer.offerId"
+      >
+        {{ reply.offer.offerName }}
+      </div>
     </div>
   </div>
   <div *ngIf="this.role == 'recruiter'">
-    <div class="text-center">
+    <div class="text-center mt">
       <button mat-raised-button (click)="toggleAddOffer()">
         Add new offer
       </button>
     </div>
-    <div *ngIf="showAddOffer">
+    <div *ngIf="offerService.addOfferForm">
       <app-add-offer></app-add-offer>
     </div>
-    <div class="font-white sub-headline">Your offers</div>
-    <div *ngFor="let offer of offers" class="font-white">
-      <div class="as-link" [routerLink]="'/offers/' + offer.offerId">
-        {{ offer.offerName }}
+    <div>
+      <div class="font-white sub-headline">Your offers</div>
+      <div *ngIf="offers.length > 0" class="mt-5">
+        <div *ngFor="let offer of offers" class="font-white">
+          <div class="as-link" [routerLink]="'/offers/' + offer.offerId">
+            {{ offer.offerName }}
+          </div>
+        </div>
+      </div>
+      <div *ngIf="offers.length == 0" class="font-white text-center">
+        No offers yet.
       </div>
     </div>
   </div>

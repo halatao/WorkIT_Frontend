@@ -4,7 +4,7 @@
 .inline {
   display: inline;
 }
-.left-align{
+.left-align {
   float: left;
 }
 .response-list {
@@ -85,4 +85,18 @@ button.mat-raised-button {
   background: #ce8888;
   display: table-cell;
   padding: 2px;
+}
+::ng-deep .mat-focused .mat-form-field-label {
+  color: whitesmoke !important;
+}
+
+::ng-deep.mat-form-field-underline {
+  background-color: whitesmoke !important;
+}
+
+::ng-deep.mat-form-field-ripple {
+  background-color: whitesmoke !important;
+}
+::ng-deep .mat-form-field-label {
+  color: whitesmoke !important;
 }

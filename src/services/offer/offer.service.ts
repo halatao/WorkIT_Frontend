@@ -9,6 +9,7 @@ import { HttpClient } from '@angular/common/http';
 export class OfferService {
   offers: Offer[] = [];
   filter: Filter = new Filter(0, [], []);
+  addOfferForm: boolean = false;
   constructor() {}
 
   setOffers(offers: any[]) {

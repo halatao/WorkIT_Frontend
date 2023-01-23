@@ -10,13 +10,13 @@ button.mat-raised-button {
   padding: 5px;
 }
 .sub-headline {
-  font-size: 20px;
+  font-size: 30px;
   display: inline-block;
   vertical-align: middle;
   padding: 5px;
 }
 .text {
-  padding: 5px;
+  padding: 20px;
 }
 .text-center {
   text-align: center;
@@ -38,4 +38,10 @@ button.mat-raised-button {
 }
 .as-link:hover {
   cursor: pointer;
+}
+.mt{
+  margin-top: 20px;
+}
+.mt-5{
+  margin-top: 5px;
 }

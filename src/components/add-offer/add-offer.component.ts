@@ -8,6 +8,7 @@ import { CategoryService } from 'src/services/category/category.service';
 import { PostOffer } from 'src/model/postOffer';
 import { Router } from '@angular/router';
 import { UserService } from 'src/services/user/user.service';
+import { OfferService } from 'src/services/offer/offer.service';
 
 @Component({
   selector: 'app-add-offer',
@@ -31,7 +32,8 @@ export class AddOfferComponent implements OnInit {
     private locationService: LocationService,
     private categoryService: CategoryService,
     private router: Router,
-    private userService: UserService
+    private userService: UserService,
+    private offerService: OfferService
   ) {}
 
   ngOnInit(): void {
@@ -85,5 +87,6 @@ export class AddOfferComponent implements OnInit {
         }
       }
     );
+    this.offerService.addOfferForm = false;
   }
 }
