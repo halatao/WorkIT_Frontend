@@ -1,15 +1,31 @@
 <div>
-  <div [routerLink]="''" class="inline">WorkIT - Your IT jobs listing page</div>
+  <div [routerLink]="''" class="inline as-link font-white">
+    WorkIT - Your IT jobs listing page
+  </div>
   <div class="inline right-align">
-    <div *ngIf="!this.userService.logged" [routerLink]="'/auth'" class="inline">
+    <div
+      *ngIf="!this.userService.logged"
+      [routerLink]="'/auth'"
+      class="inline as-link font-white"
+    >
       Login
     </div>
-    <div *ngIf="this.userService.logged" [routerLink]="'/profile'">
+    <div
+      *ngIf="this.userService.logged"
+      [routerLink]="'/profile'"
+      class="as-link font-white text-center"
+    >
       <div>
         {{ this.userService.user.username }}
       </div>
       <div>
-        <button (click)="logout()">Logout</button>
+        <button
+          mat-raised-button
+          (click)="logout()"
+          class="as-link font-white text-center"
+        >
+          Logout
+        </button>
       </div>
     </div>
   </div>

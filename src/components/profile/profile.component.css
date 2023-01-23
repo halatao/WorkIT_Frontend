@@ -1,0 +1,41 @@
+button.mat-raised-button {
+  background-color: orange;
+  color: whitesmoke;
+  font-weight: 500;
+}
+.headline {
+  font-size: 35px;
+  display: flex;
+  align-items: center;
+  padding: 5px;
+}
+.sub-headline {
+  font-size: 20px;
+  display: inline-block;
+  vertical-align: middle;
+  padding: 5px;
+}
+.text {
+  padding: 5px;
+}
+.text-center {
+  text-align: center;
+}
+.font-white {
+  color: whitesmoke;
+  font-weight: 500;
+}
+.bg-dark {
+  background-color: #2b323d;
+}
+.spacing {
+  padding: 4px;
+}
+.center {
+  width: 50%;
+  margin-left: auto;
+  margin-right: auto;
+}
+.as-link:hover {
+  cursor: pointer;
+}

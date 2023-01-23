@@ -11,7 +11,6 @@ const routes: Routes = [
   { path: 'offers/:id', component: SelectedOfferComponent },
   { path: 'offers', component: OffersComponent },
   { path: '', component: FilterOffersComponent },
-  { path: 'add_offer', component: AddOfferComponent },
   { path: 'auth', component: AuthComponent },
   { path: 'profile', component: ProfileComponent },
 ];

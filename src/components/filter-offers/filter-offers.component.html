@@ -1,6 +1,6 @@
 <mat-card class="form">
   <form [formGroup]="filterOfferForm">
-    <div class="inline">
+    <div class="inline font-white">
       <mat-slider
         thumbLabel
         [displayWith]="formatLabel"
@@ -45,7 +45,6 @@
     <div>
       <button
         mat-raised-button
-        color="primary"
         (click)="filterOffers()"
         [routerLink]="'/offers'"
       >

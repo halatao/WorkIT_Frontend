@@ -1,4 +1,4 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { LocationService } from 'src/services/location/location.service';
@@ -7,6 +7,7 @@ import { Category } from 'src/services/category/category';
 import { CategoryService } from 'src/services/category/category.service';
 import { PostOffer } from 'src/model/postOffer';
 import { Router } from '@angular/router';
+import { UserService } from 'src/services/user/user.service';
 
 @Component({
   selector: 'app-add-offer',
@@ -18,6 +19,7 @@ export class AddOfferComponent implements OnInit {
   categories: Category[] = [];
   addOfferForm: FormGroup = new FormGroup({
     name: new FormControl('', Validators.required),
+    description: new FormControl('', Validators.required),
     salaryLowest: new FormControl(0),
     salaryHighest: new FormControl(0),
     category: new FormControl('', Validators.required),
@@ -28,7 +30,8 @@ export class AddOfferComponent implements OnInit {
     private http: HttpClient,
     private locationService: LocationService,
     private categoryService: CategoryService,
-    private router:Router
+    private router: Router,
+    private userService: UserService
   ) {}
 
   ngOnInit(): void {
@@ -53,23 +56,29 @@ export class AddOfferComponent implements OnInit {
   postOffer() {
     let value = this.addOfferForm.value;
     let name = value.name;
+    let description = value.description;
     let salaryLowest = value.salaryLowest;
     let salaryHighest = value.salaryHighest;
     let location = value.location;
     let category = value.category;
     let offer = new PostOffer(
       name,
-      salaryLowest,
-      salaryHighest,
-      location,
+      description,
+      this.userService.user.id,
       category,
-      1
+      location,
+      salaryLowest,
+      salaryHighest
     );
     const url = 'https://localhost:7003/api/Offers/Create';
-    this.http.post<PostOffer>(url, offer).subscribe(
-      (response: any) => {
-        console.log(response);
-      },
+    let header = {
+      headers: new HttpHeaders().set(
+        'Authorization',
+        'Bearer ' + this.userService.jwt
+      ),
+    };
+    this.http.post<PostOffer>(url, offer, header).subscribe(
+      (response: any) => {},
       (error: any) => {
         if (error.status == 401) {
           this.router.navigate(['/auth']);

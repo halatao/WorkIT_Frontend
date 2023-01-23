@@ -1,0 +1,43 @@
+.center {
+  display: flex;
+  justify-content: center;
+}
+.spacing {
+  padding: 4px;
+}
+.inline {
+  display: inline;
+  float: left;
+}
+.bg-dark {
+  background-color: #2b323d;
+}
+.font-white {
+  color: whitesmoke;
+  font-weight: 500;
+}
+.vertical-auto {
+  display: flex;
+  justify-content: center;
+  align-content: center;
+  flex-direction: column;
+}
+button.mat-raised-button {
+  background-color: orange;
+  color: whitesmoke;
+  font-weight: 500;
+}
+::ng-deep .mat-focused .mat-form-field-label {
+  color: whitesmoke !important;
+}
+
+::ng-deep.mat-form-field-underline {
+  background-color: whitesmoke !important;
+}
+
+::ng-deep.mat-form-field-ripple {
+  background-color: whitesmoke !important;
+}
+::ng-deep .mat-form-field-label {
+  color: whitesmoke !important;
+}

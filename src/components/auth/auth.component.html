@@ -1,49 +1,48 @@
-<mat-card class="inline-block">
-    <form [formGroup]="authForm" class="form">
-      <div>
-        <label>Username</label>
-        <input
-          matInput
-          type="text"
-          id="username"
-          placeholder="Enter username"
-          formControlName="username"
-          required
-        />
+<mat-card class="center bg-dark font-white mat-elevation-z0">
+  <div>
+    <form [formGroup]="authForm" class="form inline">
+      <div class="spacing">
+        <mat-form-field
+          ><input
+            matInput
+            type="text"
+            id="username"
+            placeholder="Enter username"
+            formControlName="username"
+            required
+        /></mat-form-field>
+      </div>
+      <div class="spacing">
+        <mat-form-field>
+          <input
+            matInput
+            type="password"
+            id="password"
+            placeholder="Enter password"
+            formControlName="password"
+          />
+        </mat-form-field>
+      </div>
+      <div *ngIf="register" class="spacing">
+        <mat-form-field>
+          <input
+            matInput
+            type="password"
+            id="password2"
+            placeholder="Repeat password"
+            formControlName="password2"
+          />
+        </mat-form-field>
       </div>
       <div>
-        <label>Password</label>
-        <input
-          matInput
-          type="password"
-          id="password"
-          placeholder="Enter password"
-          formControlName="password"
-        />
+        {{ errMessage }}
       </div>
-      <div *ngIf="register">
-        <label>Repeat password</label>
-        <input
-          matInput
-          type="password"
-          id="password2"
-          placeholder="Repeat password"
-          formControlName="password2"
-        />
-      </div>
-      <div>
-        {{errMessage}}
-      </div>
-      <label (click)="toggleRegister()">{{authLabel}}</label>
-      <div>
-        <button
-          mat-raised-button
-          color="primary"
-          (click)="authUser()"
-        >
-          {{btnLabel}}
-        </button>
-      </div>
+      <label (click)="toggleRegister()">{{ authLabel }}</label>
     </form>
-  </mat-card>
-  
+  </div>
+  <div class="vertical-auto spacing">
+    <button mat-raised-button color="primary" (click)="authUser()">
+      {{ btnLabel }}
+    </button>
+  </div>
+</mat-card>

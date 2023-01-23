@@ -1,61 +1,86 @@
-<mat-card class="inline-block">
-  <form [formGroup]="addOfferForm" (ngSubmit)="postOffer()" class="form">
-    <div>
-      <label>Position name</label>
-      <input
-        matInput
-        type="text"
-        id="name"
-        placeholder="Position name"
-        formControlName="name"
-      />
-    </div>
-    <div>
-      <label>Salary minimal</label>
-      <input
-        matInput
-        type="number"
-        id="salaryLowest"
-        formControlName="salaryLowest"
-        min="0"
-        value="20000"
-      />
-    </div>
-    <div>
-      <label>Salary maximal</label>
-      <input
-        matInput
-        type="number"
-        id="salaryHighest"
-        formControlName="salaryHighest"
-        min="0"
-        value="20000"
-      />
-    </div>
-    <div>
-      <label>Location</label>
-      <select formControlName="location">
-        <option
-          *ngFor="let location of locations"
-          [value]="location.locationId"
-        >
-          {{ location.locationName }}
-        </option>
-      </select>
-    </div>
-    <div>
-      <label>Category</label>
-      <select formControlName="category">
-        <option
-          *ngFor="let category of categories"
-          [value]="category.categoryId"
-        >
-          {{ category.categoryName }}
-        </option>
-      </select>
-    </div>
-    <div>
-      <button type="submit">Submit</button>
-    </div>
-  </form>
-</mat-card>
+<div>
+  <div class="font-white">Add new offer</div>
+  <div>
+    <mat-card class="inline-block bg-dark font-white mat-elevation-z0">
+      <form [formGroup]="addOfferForm" (ngSubmit)="postOffer()" class="form">
+        <div>
+          <mat-form-field>
+            <mat-label>Position name</mat-label>
+            <input
+              matInput
+              type="text"
+              id="name"
+              formControlName="name"
+            />
+          </mat-form-field>
+        </div>
+        <div>
+          <mat-form-field>
+            <mat-label>Position description</mat-label>
+            <input
+              matInput
+              type="text"
+              id="description"
+              formControlName="description"
+            />
+          </mat-form-field>
+        </div>
+        <div>
+          <mat-form-field>
+            <mat-label>Salary lowest</mat-label>
+            <input
+              matInput
+              type="number"
+              id="salaryLowest"
+              formControlName="salaryLowest"
+              min="0"
+              value="20000"
+            />
+          </mat-form-field>
+        </div>
+        <div>
+          <mat-form-field>
+            <mat-label>Salary highest</mat-label>
+            <input
+              matInput
+              type="number"
+              id="salaryHighest"
+              formControlName="salaryHighest"
+              min="0"
+              value="20000"
+            />
+          </mat-form-field>
+        </div>
+        <div>
+          <mat-form-field>
+            <mat-label>Location</mat-label>
+            <mat-select formControlName="location">
+              <mat-option
+                *ngFor="let location of locations"
+                [value]="location.locationId"
+              >
+                {{ location.locationName }}
+              </mat-option>
+            </mat-select>
+          </mat-form-field>
+        </div>
+        <div>
+          <mat-form-field>
+            <mat-label>Category</mat-label>
+            <mat-select formControlName="category">
+              <mat-option
+                *ngFor="let category of categories"
+                [value]="category.categoryId"
+              >
+                {{ category.categoryName }}
+              </mat-option>
+            </mat-select>
+          </mat-form-field>
+        </div>
+        <div>
+          <button mat-raised-button type="submit">Submit</button>
+        </div>
+      </form>
+    </mat-card>
+  </div>
+</div>

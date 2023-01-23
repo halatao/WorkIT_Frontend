@@ -15,15 +15,13 @@ export class AccountComponent implements OnInit {
     private http: HttpClient,
     private cookieService: CookieService,
     public userService: UserService,
-    private router:Router
+    private router: Router
   ) {}
 
   ngOnInit(): void {
-    if (!this.userService.logged) {
-      this.userService.jwt = this.cookieService.get('jwt');
-      let username = this.cookieService.get('username');
-      this.fetchUser(username);
-    }
+    this.userService.jwt = this.cookieService.get('jwt');
+    let username = this.cookieService.get('username');
+    this.fetchUser(username);
   }
   fetchUser(username: string) {
     const url =
@@ -47,8 +45,7 @@ export class AccountComponent implements OnInit {
         this.userService.toggleTrue();
         console.log(user);
       },
-      (error: any) => {
-      }
+      (error: any) => {}
     );
   }
   logout() {

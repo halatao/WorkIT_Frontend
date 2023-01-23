@@ -1,24 +1,27 @@
 export class PostOffer {
-  name: string;
-  salaryLowest: number;
-  salaryHighest: number;
-  location: number;
-  category: number;
-  user: number;
+  offerName: string;
+  offerDescription: string;
+  userId: number;
+  categoryId: number;
+  locationId: number;
+  salaryMin: number;
+  salaryMax: number;
 
   constructor(
-    name: string,
-    salaryLowest: number,
-    salaryHighest: number,
-    location: number,
-    category: number,
-    user: number
+    offerName: string,
+    offerDescription: string,
+    userId: number,
+    categoryId: number,
+    locationId: number,
+    salaryMin: number,
+    salaryMax: number
   ) {
-    this.name = name;
-    this.salaryLowest = salaryLowest;
-    this.salaryHighest = salaryHighest;
-    this.location = location;
-    this.category = category;
-    this.user = user;
+    this.offerName = offerName;
+    this.offerDescription = offerDescription;
+    this.userId = userId;
+    this.categoryId = categoryId;
+    this.locationId = locationId;
+    this.salaryMin = salaryMin;
+    this.salaryMax = salaryMax;
   }
 }

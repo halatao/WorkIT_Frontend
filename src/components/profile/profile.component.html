@@ -1,17 +1,24 @@
-<div>
+<div class="center">
   <div *ngIf="this.role == 'user'">
     <div *ngFor="let reply of replies">
       {{ reply }}
     </div>
   </div>
   <div *ngIf="this.role == 'recruiter'">
-    <div *ngFor="let offer of offers">
-      <div [routerLink]="'/offer/' + offer.offerId">
-        {{ offer }}
+    <div class="text-center">
+      <button mat-raised-button (click)="toggleAddOffer()">
+        Add new offer
+      </button>
+    </div>
+    <div *ngIf="showAddOffer">
+      <app-add-offer></app-add-offer>
+    </div>
+    <div class="font-white sub-headline">Your offers</div>
+    <div *ngFor="let offer of offers" class="font-white">
+      <div class="as-link" [routerLink]="'/offers/' + offer.offerId">
+        {{ offer.offerName }}
       </div>
     </div>
   </div>
-  <div *ngIf="this.role == 'admin'">
-    Admin page
-  </div>
+  <div *ngIf="this.role == 'admin'">Admin page</div>
 </div>

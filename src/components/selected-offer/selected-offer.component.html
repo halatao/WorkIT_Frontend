@@ -1,64 +1,92 @@
-<h1>{{ selectedOffer.name }}</h1>
-<h2>{{ selectedOffer.salaryLowest }} - {{ selectedOffer.salaryHighest }}Kč</h2>
-<h3>{{ selectedOffer.location.locationName }}</h3>
-<p>{{ selectedOffer.description }}</p>
-<div>
-  <div *ngIf="!this.userService.logged">
-    <mat-label>You have to login for reply</mat-label>
-  </div>
-  <div *ngIf="userService.user.role.name == 'user' && userService.logged">
-    <mat-card class="form">
-      <form [formGroup]="replyForm">
-        <div>
-          <label>Position name</label>
-          <input
-            matInput
-            type="text"
-            id="reply"
-            placeholder="Reply message"
-            formControlName="reply"
-          />
-        </div>
-        <div>
-          <label>Position name</label>
-          <input
-            matInput
-            type="text"
-            id="cv"
-            placeholder="Your CV"
-            formControlName="cv"
-          />
-        </div>
-        <div>
-          <button mat-raised-button color="primary" (click)="submitReply()">
-            Send reply
-          </button>
-        </div>
-      </form>
-    </mat-card>
-  </div>
-  <div *ngIf="userService.user.role.name == 'recruiter' && userService.logged">
-    <div class="inline left-align">
-      <div *ngFor="let response of responses">
-        <div (click)="this.setResponse(response.responseId)">
-          {{ response.user.userName }}
-        </div>
-      </div>
+<div class="center font-white bg-dark margin">
+  <div class="headline min-height">{{ selectedOffer.name }}</div>
+  <div class="sub-headline min-height">
+    <div *ngIf="selectedOffer.salaryHighest == 0">Částka neuvedena</div>
+    <div *ngIf="selectedOffer.salaryHighest > 0">
+      {{ selectedOffer.salaryLowest }} - {{ selectedOffer.salaryHighest }}Kč
     </div>
-    <div class="inline left-align">
-      <div *ngIf="selectedResponseActive">
-        <h3>User</h3>
-        <p>
-          {{ this.selectedResponse.user.userName }}
-        </p>
-        <h3>Response</h3>
-        <p>
-          {{ this.selectedResponse.responseText }}
-        </p>
-        <h3>CV</h3>
-        <p>
-          {{ this.selectedResponse.curriculumVitae }}
-        </p>
+  </div>
+  <div class="sub-headline min-height">
+    {{ selectedOffer.location.locationName }}
+  </div>
+  <div class="text">
+    {{ selectedOffer.description }}
+  </div>
+
+  <div class="text-center bg-dark">
+    <div *ngIf="!this.userService.logged">
+      <mat-label>You have to login for reply</mat-label>
+    </div>
+    <div *ngIf="userService.user.role.name == 'user' && userService.logged">
+      <mat-card class="form bg-dark font-white mat-elevation-z0">
+        <form [formGroup]="replyForm">
+          <label>Reply message</label>
+          <div class="spacing">
+            <input
+              matInput
+              type="text"
+              id="reply"
+              placeholder="Reply message"
+              formControlName="reply"
+            />
+          </div>
+          <label>CV</label>
+          <div class="spacing">
+            <input
+              matInput
+              type="text"
+              id="cv"
+              placeholder="Your CV"
+              formControlName="cv"
+            />
+          </div>
+          <div>
+            <button mat-raised-button color="primary" (click)="submitReply()">
+              Send reply
+            </button>
+          </div>
+        </form>
+      </mat-card>
+    </div>
+    <div
+      class="responses"
+      *ngIf="userService.user.role.name == 'recruiter' && userService.logged"
+    >
+      <div class="sub-headline">Responses</div>
+      <div *ngIf="this.responses.length == 0">No responses yet.</div>
+      <div>
+        <div class="inline left-align response-list">
+          <div>
+            <div *ngIf="this.responses.length > 0">
+              <div
+                *ngFor="let response of responses"
+                class="as-link border spacing"
+              >
+                <div (click)="this.setResponse(response.responseId)">
+                  {{ response.user.userName }}
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="inline left-align text-left response-preview">
+          <div>
+            <div *ngIf="selectedResponseActive" class="border spacing">
+              <div class="sub-headline">User</div>
+              <div class="text">
+                {{ this.selectedResponse.user.userName }}
+              </div>
+              <div class="sub-headline">Response</div>
+              <div class="text">
+                {{ this.selectedResponse.responseText }}
+              </div>
+              <div class="sub-headline">CV</div>
+              <div class="text">
+                {{ this.selectedResponse.curriculumVitae }}
+              </div>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
   </div>
