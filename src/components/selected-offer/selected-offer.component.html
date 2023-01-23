@@ -17,7 +17,13 @@
     <div *ngIf="!this.userService.logged">
       <mat-label>You have to login for reply</mat-label>
     </div>
-    <div *ngIf="userService.user.role.name == 'user' && userService.logged">
+    <div
+      *ngIf="
+        userService.user.role.name == 'user' &&
+        userService.logged &&
+        replyFormVisible
+      "
+    >
       <mat-card class="form bg-dark font-white mat-elevation-z0">
         <form [formGroup]="replyForm">
           <div class="spacing">

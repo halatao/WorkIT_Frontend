@@ -14,7 +14,7 @@ import { ResponseService } from 'src/services/response/response.service';
 })
 export class SelectedOfferComponent implements OnInit {
   selectedOffer: Offer = <Offer>{};
-  replyFormVisible: boolean = false;
+  replyFormVisible: boolean = true;
   responses: any[] = [];
   selectedResponse: any = <any>{};
   selectedResponseActive: boolean = false;
@@ -110,6 +110,7 @@ export class SelectedOfferComponent implements OnInit {
         }
       }
     );
+    this.replyFormToggle();
   }
 
   replyFormToggle() {
