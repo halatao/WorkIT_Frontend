@@ -8,7 +8,7 @@ import { HttpClient } from '@angular/common/http';
 })
 export class OfferService {
   offers: Offer[] = [];
-  filter: Filter = new Filter(0, [], []);
+  filter: Filter = new Filter(0, [], [], new Date('2000'), '');
   addOfferForm: boolean = false;
   constructor() {}
 

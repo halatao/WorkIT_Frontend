@@ -1,11 +1,14 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, inject } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { UserService } from 'src/services/user/user.service';
 import { PostAuth } from 'src/model/postAuth';
 import { Location } from '@angular/common';
 import { User } from 'src/services/user/user';
 import { Router } from '@angular/router';
+import {} from '@angular/core';
+import {MatSnackBar, MatSnackBarRef} from '@angular/material/snack-bar';
+import {WelcomeComponent} from "../welcome/welcome.component";
 
 @Component({
   selector: 'app-auth',
@@ -35,7 +38,8 @@ export class AuthComponent implements OnInit {
     private userService: UserService,
     private http: HttpClient,
     private location: Location,
-    private router: Router
+    private router: Router,
+    private snackBar:MatSnackBar
   ) {
     this.register = false;
     this.authLabel = this.reg;
@@ -120,6 +124,7 @@ export class AuthComponent implements OnInit {
         this.userService.setJwtCookie();
         this.userService.toggleTrue();
         this.location.back();
+        this.showWelcome();
       },
       (error: any) => {
         if (error.status == 401) {
@@ -165,5 +170,8 @@ export class AuthComponent implements OnInit {
         this.valid = true;
       }
     }
+  }
+  showWelcome(){
+    this.snackBar.openFromComponent(WelcomeComponent,{duration:5000});
   }
 }

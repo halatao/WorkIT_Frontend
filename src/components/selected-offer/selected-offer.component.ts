@@ -41,6 +41,8 @@ export class SelectedOfferComponent implements OnInit {
       let url = 'https://localhost:7003/api/Offers/ById?offerId=' + this.param;
       this.http.get(url).subscribe((res) => {
         this.setOffer(res);
+        console.log(res);
+        console.log(this.selectedOffer);
       });
     }
     if (this.userService.user.role.name == 'recruiter') {

@@ -11,11 +11,11 @@ import { SelectedOfferComponent } from 'src/components/selected-offer/selected-o
 import { AddOfferComponent } from 'src/components/add-offer/add-offer.component';
 import { FilterOffersComponent } from 'src/components/filter-offers/filter-offers.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { MatNativeDateModule } from '@angular/material/core';
 import { MaterialModule } from './mat-module';
 import { AuthComponent } from 'src/components/auth/auth.component';
 import { AccountComponent } from 'src/components/account/account.component';
 import { ProfileComponent } from 'src/components/profile/profile.component';
+import { WelcomeComponent } from '../components/welcome/welcome.component';
 
 @NgModule({
   declarations: [
@@ -27,6 +27,7 @@ import { ProfileComponent } from 'src/components/profile/profile.component';
     AuthComponent,
     AccountComponent,
     ProfileComponent,
+    WelcomeComponent,
   ],
   imports: [
     BrowserModule,
@@ -36,7 +37,6 @@ import { ProfileComponent } from 'src/components/profile/profile.component';
     ReactiveFormsModule,
     BrowserAnimationsModule,
     FormsModule,
-    MatNativeDateModule,
     MaterialModule,
   ],
   providers: [],

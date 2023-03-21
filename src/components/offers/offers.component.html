@@ -3,6 +3,10 @@
     No results
   </div>
   <div *ngIf="offers.length > 0">
+    <label for="sort-by-select">Sort By:</label>
+    <select id="sort-by-select" [(ngModel)]="sortBy" (change)="onSortOptionChange($event)">>
+      <option *ngFor="let option of sortOptions" [value]="option.value">{{ option.label }}</option>
+    </select>
     <div class="offer_list font-white" *ngFor="let offer of offers">
       <div
         class="offer_frame as-link"
@@ -12,13 +16,26 @@
           <h2>{{ offer.name }}</h2>
         </div>
         <div>
-          <div *ngIf="offer.salaryHighest == 0">Salary not specified</div>
-          <div *ngIf="offer.salaryHighest > 0">
+          <div *ngIf="offer.salaryLowest == 0">Salary not specified</div>
+          <div *ngIf="offer.salaryLowest > 0">
             {{ offer.salaryLowest }} - {{ offer.salaryHighest }}Kč
           </div>
           <p>{{ offer.location.locationName }}</p>
         </div>
       </div>
     </div>
+  </div>
+  <div *ngIf="totalPages > 0">
+    <span>Page size:</span>
+    <select [(ngModel)]="pageSize" (change)="handlePageSizeChange($event)">
+      <option value="5">5</option>
+      <option value="10">10</option>
+      <option value="20">20</option>
+    </select>
+  </div>
+  <div *ngIf="totalPages > 1">
+    <button *ngFor="let page of pages" [disabled]="page === pageNumber" (click)="handlePageClick(page)">
+      {{ page }}
+    </button>
   </div>
 </div>

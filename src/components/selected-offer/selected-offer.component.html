@@ -1,8 +1,8 @@
 <div class="center font-white bg-dark margin">
   <div class="headline min-height">{{ selectedOffer.name }}</div>
   <div class="sub-headline min-height">
-    <div *ngIf="selectedOffer.salaryHighest == 0">Salary not specified</div>
-    <div *ngIf="selectedOffer.salaryHighest > 0">
+    <div *ngIf="selectedOffer.salaryLowest == 0">Salary not specified</div>
+    <div *ngIf="selectedOffer.salaryLowest > 0">
       {{ selectedOffer.salaryLowest }} - {{ selectedOffer.salaryHighest }}Kč
     </div>
   </div>

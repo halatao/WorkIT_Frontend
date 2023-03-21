@@ -17,10 +17,13 @@ export class FilterOffersComponent implements OnInit {
   locations: Location[] = [];
   categories: Category[] = [];
   salaryLowest: string = '0';
+
   filterOfferForm: FormGroup = new FormGroup({
     salaryMin: new FormControl(0),
     category: new FormControl([]),
     location: new FormControl([]),
+    created: new FormControl(new Date()),
+    search: new FormControl(''),
   });
 
   constructor(
@@ -53,8 +56,10 @@ export class FilterOffersComponent implements OnInit {
     let location = value.location;
     let category = value.category;
     let salaryMin = value.salaryMin;
+    let created = value.created;
+    let search = value.search;
 
-    let filter = new Filter(salaryMin, location, category);
+    let filter = new Filter(salaryMin, location, category, created, search);
 
     this.offerService.setFilter(filter);
   }
