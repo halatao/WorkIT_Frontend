@@ -1,4 +1,4 @@
-import { HttpClient, HttpHeaders } from '@angular/common/http';
+import {HttpClient, HttpHeaders, HttpParams} from '@angular/common/http';
 import { Component, OnInit, inject } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { UserService } from 'src/services/user/user.service';
@@ -49,7 +49,7 @@ export class AuthComponent implements OnInit {
 
   ngOnInit(): void {}
 
-  authUser() {
+  async authUser() {
     this.validateForm();
     if (this.valid === false) {
       return;
@@ -61,7 +61,6 @@ export class AuthComponent implements OnInit {
     } else {
       role = 'user';
     }
-    console.log(role);
 
     let auth = new PostAuth(value.username, value.password, role);
     if (this.register) {
@@ -82,20 +81,18 @@ export class AuthComponent implements OnInit {
       );
     } else {
       const url = 'https://localhost:7003/api/Users/Login';
-      this.http
-        .post(url, null, {
-          responseType: 'text',
-          params: {
-            username: value.username,
-            password: value.password,
-          },
-        })
-        .subscribe(
+      await this.http
+        .post(url, {
+          username: value.username,
+          password: value.password,
+        },{responseType:"text"}).toPromise().then(
           (response: any) => {
+            console.log(response);
             this.userService.jwt = response;
             this.fetchUser(value.username);
           },
           (error: any) => {
+            console.log(error);
             this.errMessage = error.error;
           }
         );
