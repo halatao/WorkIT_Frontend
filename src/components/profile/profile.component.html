@@ -23,12 +23,22 @@
     <div *ngIf="offerService.addOfferForm">
       <app-add-offer></app-add-offer>
     </div>
+    <div class="font-white sub-headline">Your offers</div>
     <div>
-      <div class="font-white sub-headline">Your offers</div>
       <div *ngIf="offers.length > 0" class="mt-5">
-        <div *ngFor="let offer of offers" class="font-white">
-          <div class="as-link" [routerLink]="'/offers/' + offer.offerId">
-            {{ offer.offerName }}
+        <div *ngFor="let offer of offers" class="font-white offersProfile">
+          <div class="as-link inline width-50">
+            <div [routerLink]="'/offers/' + offer.offerId">
+              {{ offer.offerName }}
+            </div>
+          </div>
+          <div class="inline width-25">
+            <div class="inline as-link">
+              update
+            </div>
+            <div class="as-link inline" (click)="deleteOffer(offer.offerId)">
+              delete
+            </div>
           </div>
         </div>
       </div>

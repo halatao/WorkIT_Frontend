@@ -76,11 +76,14 @@ export class AddOfferComponent implements OnInit {
     let header = {
       headers: new HttpHeaders().set(
         'Authorization',
-        'Bearer ' + this.userService.jwt
+        'Bearer ' + this.userService.getJwt()
       ),
     };
     this.http.post<PostOffer>(url, offer, header).subscribe(
-      (response: any) => {},
+      (response: any) => {
+        this.userService.refetchUser();
+        this.offerService.addOfferForm = false;
+      },
       (error: any) => {
         if (error.status == 401) {
           this.router.navigate(['/auth']);

@@ -19,20 +19,10 @@ export class AccountComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    this.userService.jwt = this.cookieService.get('jwt');
-    let username = this.cookieService.get('username');
-    this.fetchUser(username);
+    this.fetchUser();
   }
-  fetchUser(username: string) {
-    const url =
-      'https://localhost:7003/api/Users/ByUsername?username=' + username;
-    let header = {
-      headers: new HttpHeaders().set(
-        'Authorization',
-        'Bearer ' + this.userService.jwt
-      ),
-    };
-    this.http.get<User>(url, header).subscribe(
+  fetchUser() {
+    this.userService.fetchUser().subscribe(
       (response: any) => {
         let user = new User(
           response.userId,

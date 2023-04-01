@@ -45,3 +45,24 @@ button.mat-raised-button {
 .mt-5{
   margin-top: 5px;
 }
+.inline {
+  display: inline-block;
+  margin-right: 15px;
+  margin-left: 15px;
+  vertical-align: middle;
+}
+.width-65{
+  width: 65%;
+}
+.width-50{
+  width: 50%;
+}
+.width-25{
+  width: 25%;
+}
+.offersProfile {
+  border: 2px solid orange;
+  padding: 8px;
+  max-width:80%;
+  margin: 5px auto;
+}
