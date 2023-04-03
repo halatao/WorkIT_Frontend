@@ -2,7 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { Offer } from 'src/services/offer/offer';
 import { OfferService } from 'src/services/offer/offer.service';
-import { Filter } from 'src/model/filter';
+import { Filter } from 'src/model/Filter';
 
 @Component({
   selector: 'app-offers',

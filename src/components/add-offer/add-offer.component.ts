@@ -44,7 +44,6 @@ export class AddOfferComponent implements OnInit {
       })
       .then(() => {
         this.locations = this.locationService.getLocations();
-        console.log(this.locations);
       });
     this.http
       .get<[]>('https://localhost:7003/api/Categories/All')
@@ -66,7 +65,7 @@ export class AddOfferComponent implements OnInit {
     let offer = new PostOffer(
       name,
       description,
-      this.userService.user.id,
+      this.userService.user$.getValue().id,
       category,
       location,
       salaryLowest,

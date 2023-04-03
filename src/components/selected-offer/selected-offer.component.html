@@ -19,7 +19,7 @@
     </div>
     <div
       *ngIf="
-        userService.user.role.name == 'user' &&
+        userService.user$.getValue().role.name == 'user' &&
         userService.logged &&
         replyFormVisible
       "
@@ -48,7 +48,7 @@
     </div>
     <div
       class="responses"
-      *ngIf="userService.user.role.name == 'recruiter' && userService.logged"
+      *ngIf="userService.user$.getValue().role.name == 'recruiter' && userService.logged"
     >
       <div class="sub-headline">Responses</div>
       <div *ngIf="this.responses.length == 0">No responses yet.</div>

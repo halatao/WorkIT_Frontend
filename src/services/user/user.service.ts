@@ -10,7 +10,7 @@ import { Observable, BehaviorSubject } from 'rxjs';
 export class UserService {
   logged: boolean;
   jwt: string = '';
-  user: User = <User>{};
+  user$: BehaviorSubject<User> = new BehaviorSubject<User>(<any>{});
   constructor(private cookieService: CookieService, private http: HttpClient) {
     this.logged = false;
   }
@@ -38,7 +38,7 @@ export class UserService {
           response.offers,
           response.responses
         );
-        this.user = user;
+        this.user$.next(user); // emit new value
         this.toggleTrue();
       },
       (error: any) => {}
@@ -59,12 +59,14 @@ export class UserService {
 
   setJwtCookie() {
     this.cookieService.set('jwt', this.jwt);
-    this.cookieService.set('username', this.user.username);
+    if (this.user$ && this.user$.value) { // add a type guard to check if user$ and its value are not null
+      this.cookieService.set('username', this.user$.value.username);
+    }
   }
 
   resetUserCredentials() {
     this.jwt = '';
-    this.user = <User>{};
+    this.user$.next(<any>{}); // emit new value
     this.deleteCookies();
     this.toggleFalse();
   }

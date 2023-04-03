@@ -6,6 +6,7 @@ import { FilterOffersComponent } from 'src/components/filter-offers/filter-offer
 import { OffersComponent } from 'src/components/offers/offers.component';
 import { ProfileComponent } from 'src/components/profile/profile.component';
 import { SelectedOfferComponent } from 'src/components/selected-offer/selected-offer.component';
+import {UpdateOfferComponent} from "../components/update-offer/update-offer.component";
 
 const routes: Routes = [
   { path: 'offers/:id', component: SelectedOfferComponent },
@@ -13,6 +14,7 @@ const routes: Routes = [
   { path: '', component: FilterOffersComponent },
   { path: 'auth', component: AuthComponent },
   { path: 'profile', component: ProfileComponent },
+  { path: 'update/:id', component:UpdateOfferComponent }
 ];
 
 @NgModule({

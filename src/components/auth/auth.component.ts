@@ -87,7 +87,6 @@ export class AuthComponent implements OnInit {
           password: value.password,
         },{responseType:"text"}).toPromise().then(
           (response: any) => {
-            console.log(response);
             this.userService.jwt = response;
             this.fetchUser(value.username);
           },
@@ -117,7 +116,7 @@ export class AuthComponent implements OnInit {
           response.offers,
           response.responses
         );
-        this.userService.user = user;
+        this.userService.user$.next(user);
         this.userService.setJwtCookie();
         this.userService.toggleTrue();
         this.location.back();

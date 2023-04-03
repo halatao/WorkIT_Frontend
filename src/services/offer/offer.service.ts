@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
-import { Filter } from 'src/model/filter';
 import { Offer } from './offer';
 import { HttpClient } from '@angular/common/http';
+import {Filter} from "../../model/Filter";
 
 @Injectable({
   providedIn: 'root',

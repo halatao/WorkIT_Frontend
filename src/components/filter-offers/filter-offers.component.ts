@@ -6,7 +6,7 @@ import { Category } from 'src/services/category/category';
 import { CategoryService } from 'src/services/category/category.service';
 import { FormControl, FormGroup } from '@angular/forms';
 import { OfferService } from 'src/services/offer/offer.service';
-import { Filter } from 'src/model/filter';
+import { Filter } from 'src/model/Filter';
 
 @Component({
   selector: 'app-filter-offers',

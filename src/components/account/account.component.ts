@@ -31,7 +31,7 @@ export class AccountComponent implements OnInit {
           response.offers,
           response.responses
         );
-        this.userService.user = user;
+        this.userService.user$.next(user);
         this.userService.toggleTrue();
         console.log(user);
       },

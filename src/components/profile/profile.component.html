@@ -33,7 +33,7 @@
             </div>
           </div>
           <div class="inline width-25">
-            <div class="inline as-link">
+            <div class="inline as-link" [routerLink]="'/update/' + offer.id + ''">
               update
             </div>
             <div class="as-link inline" (click)="deleteOffer(offer.offerId)">

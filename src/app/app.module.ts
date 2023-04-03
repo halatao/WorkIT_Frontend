@@ -16,6 +16,7 @@ import { AuthComponent } from 'src/components/auth/auth.component';
 import { AccountComponent } from 'src/components/account/account.component';
 import { ProfileComponent } from 'src/components/profile/profile.component';
 import { WelcomeComponent } from '../components/welcome/welcome.component';
+import {UpdateOfferComponent} from "../components/update-offer/update-offer.component";
 
 @NgModule({
   declarations: [
@@ -28,6 +29,7 @@ import { WelcomeComponent } from '../components/welcome/welcome.component';
     AccountComponent,
     ProfileComponent,
     WelcomeComponent,
+    UpdateOfferComponent
   ],
   imports: [
     BrowserModule,

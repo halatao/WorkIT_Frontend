@@ -45,7 +45,7 @@ export class SelectedOfferComponent implements OnInit {
         console.log(this.selectedOffer);
       });
     }
-    if (this.userService.user.role.name == 'recruiter') {
+    if (this.userService.user$.getValue().role.name == 'recruiter') {
       let header = {
         headers: new HttpHeaders().set(
           'Authorization',
@@ -93,7 +93,7 @@ export class SelectedOfferComponent implements OnInit {
     let postReply = new PostReply(
       reply,
       cv,
-      this.userService.user.id,
+      this.userService.user$.getValue().id,
       this.param
     );
 
