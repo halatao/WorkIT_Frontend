@@ -1,1 +1,87 @@
-<p>update-offer works!</p>
+<div>
+  <div class="font-white">Update offer</div>
+  <div>
+    <mat-card class="inline-block bg-dark font-white mat-elevation-z0">
+      <form [formGroup]="addOfferForm" (ngSubmit)="postOffer()" class="form">
+        <div>
+          <mat-form-field>
+            <mat-label>Position name</mat-label>
+            <input
+              matInput
+              type="text"
+              id="name"
+              formControlName="name"
+            />
+          </mat-form-field>
+        </div>
+        <div>
+          <mat-form-field>
+            <mat-label>Position description</mat-label>
+            <input
+              matInput
+              type="text"
+              id="description"
+              formControlName="description"
+              value="{{selectedOffer.description}}"
+            />
+          </mat-form-field>
+        </div>
+        <div>
+          <mat-form-field>
+            <mat-label>Salary lowest</mat-label>
+            <input
+              matInput
+              type="number"
+              id="salaryLowest"
+              formControlName="salaryLowest"
+              min="0"
+              value="{{this.selectedOffer.salaryLowest}}"
+            />
+          </mat-form-field>
+        </div>
+        <div>
+          <mat-form-field>
+            <mat-label>Salary highest</mat-label>
+            <input
+              matInput
+              type="number"
+              id="salaryHighest"
+              formControlName="salaryHighest"
+              min="0"
+              value="{{selectedOffer.salaryHighest}}"
+            />
+          </mat-form-field>
+        </div>
+        <div>
+          <mat-form-field>
+            <mat-label>Location</mat-label>
+            <mat-select formControlName="location">
+              <mat-option
+                *ngFor="let location of locations"
+                [value]="location.locationId"
+              >
+                {{ location.locationName }}
+              </mat-option>
+            </mat-select>
+          </mat-form-field>
+        </div>
+        <div>
+          <mat-form-field>
+            <mat-label>Category</mat-label>
+            <mat-select formControlName="category">
+              <mat-option
+                *ngFor="let category of categories"
+                [value]="category.categoryId"
+              >
+                {{ category.categoryName }}
+              </mat-option>
+            </mat-select>
+          </mat-form-field>
+        </div>
+        <div>
+          <button mat-raised-button type="submit">Submit</button>
+        </div>
+      </form>
+    </mat-card>
+  </div>
+</div>

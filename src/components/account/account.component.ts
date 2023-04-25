@@ -33,7 +33,6 @@ export class AccountComponent implements OnInit {
         );
         this.userService.user$.next(user);
         this.userService.toggleTrue();
-        console.log(user);
       },
       (error: any) => {}
     );
