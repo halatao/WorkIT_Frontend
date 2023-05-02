@@ -1,5 +1,5 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { Component, OnInit } from '@angular/core';
+import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { LocationService } from 'src/services/location/location.service';
 import { Location } from 'src/services/location/location';
@@ -26,6 +26,7 @@ export class AddOfferComponent implements OnInit {
     category: new FormControl('', Validators.required),
     location: new FormControl('', Validators.required),
   });
+  @Output() offerPosted: EventEmitter<any> = new EventEmitter<any>();
 
   constructor(
     private http: HttpClient,
@@ -71,24 +72,7 @@ export class AddOfferComponent implements OnInit {
       salaryLowest,
       salaryHighest
     );
-    const url = 'https://localhost:7003/api/Offers/Create';
-    let header = {
-      headers: new HttpHeaders().set(
-        'Authorization',
-        'Bearer ' + this.userService.getJwt()
-      ),
-    };
-    this.http.post<PostOffer>(url, offer, header).subscribe(
-      (response: any) => {
-        this.userService.refetchUser();
-        this.offerService.addOfferForm = false;
-      },
-      (error: any) => {
-        if (error.status == 401) {
-          this.router.navigate(['/auth']);
-        }
-      }
-    );
-    this.offerService.addOfferForm = false;
+
+    this.offerPosted.emit(offer);
   }
 }

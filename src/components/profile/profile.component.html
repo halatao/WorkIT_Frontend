@@ -1,18 +1,21 @@
 <div class="center">
   <div *ngIf="this.role == 'user'">
-    <div class="font-white sub-headline mt">Your responses</div>
-    <div *ngIf="replies.length == 0" class="mt-5">
-      <div class="font-white text-center">No responses yet.</div>
-    </div>
-    <div *ngIf="replies.length > 0" class="mt-5">
-      <div
-        *ngFor="let reply of replies"
-        class="font-white as-link"
-        [routerLink]="'/offers/' + reply.offer.offerId"
-      >
-        {{ reply.offer.offerName }}
+    <div *ngIf="(replies$ | async) as replies">
+      <div class="font-white sub-headline mt">Your responses</div>
+      <div *ngIf="replies.length == 0" class="mt-5">
+        <div class="font-white text-center">No responses yet.</div>
+      </div>
+      <div *ngIf="replies.length > 0" class="mt-5">
+        <div
+          *ngFor="let reply of replies"
+          class="font-white as-link"
+          [routerLink]="'/offers/' + reply.offer.offerId"
+        >
+          {{ reply.offer.offerName }}
+        </div>
       </div>
     </div>
+
   </div>
   <div *ngIf="this.role == 'recruiter'">
     <div class="text-center mt">
@@ -21,10 +24,10 @@
       </button>
     </div>
     <div *ngIf="offerService.addOfferForm">
-      <app-add-offer></app-add-offer>
+      <app-add-offer (offerPosted)="onOfferPost($event)"></app-add-offer>
     </div>
     <div class="font-white sub-headline">Your offers</div>
-    <div>
+    <div *ngIf="(offers$|async) as offers">
       <div *ngIf="offers.length > 0" class="mt-5">
         <div *ngFor="let offer of offers" class="font-white offersProfile">
           <div class="as-link inline width-50">
@@ -42,7 +45,7 @@
           </div>
         </div>
       </div>
-      <div *ngIf="offers.length == 0" class="font-white text-center">
+      <div *ngIf="(offers$|async)?.length == 0" class="font-white text-center">
         No offers yet.
       </div>
     </div>

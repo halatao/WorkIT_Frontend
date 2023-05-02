@@ -1,8 +1,15 @@
 import { HttpClient } from '@angular/common/http';
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { Offer } from 'src/services/offer/offer';
 import { OfferService } from 'src/services/offer/offer.service';
 import { Filter } from 'src/model/Filter';
+import { MatTableDataSource } from '@angular/material/table';
+import {
+  MatPaginator,
+  MatPaginatorModule,
+  PageEvent,
+} from '@angular/material/paginator';
+import { NgModule, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 
 @Component({
   selector: 'app-offers',
@@ -10,7 +17,8 @@ import { Filter } from 'src/model/Filter';
   styleUrls: ['./offers.component.css'],
 })
 export class OffersComponent implements OnInit {
-  offers: Offer[] = [];
+  @ViewChild(MatPaginator) paginator!: MatPaginator;
+  offers: MatTableDataSource<Offer> = new MatTableDataSource<Offer>();
   pageNumber = 1;
   pageSize = 5;
   totalPages = 0;
@@ -21,6 +29,8 @@ export class OffersComponent implements OnInit {
     { value: 'headline', label: 'Headline' },
   ];
   public pages: number[] = [];
+  displayedColumns: string[] = ['name', 'salary', 'location', 'actions'];
+  displayedData: Offer[] = [];
   constructor(private offerService: OfferService, private http: HttpClient) {}
 
   ngOnInit(): void {
@@ -37,23 +47,32 @@ export class OffersComponent implements OnInit {
       .post<Filter>(url, filter)
       .toPromise()
       .then((res: any) => {
-        this.offerService.setOffers(res.pagedOffers);
-        this.offers = this.offerService.getOffers();
+        this.offerService.setOffers(res.ordered);
+        this.offers.data = this.offerService.getOffers();
         this.totalPages = res.totalPages;
+
+        console.log(this.totalPages);
+        console.log(this.pageNumber);
+        console.log(this.pages);
+
+        const startIndex = 0;
+        const endIndex = startIndex + this.pageSize;
+        this.displayedData = this.offers.data.slice(startIndex, endIndex);
       });
   }
-  handlePageClick(page: number): void {
-    this.pageNumber = page;
-    this.fetchOffers();
+
+  onPageChange(event: PageEvent) {
+    const startIndex = event.pageIndex * event.pageSize;
+    const endIndex = startIndex + event.pageSize;
+    this.displayedData = this.offers.data.slice(startIndex, endIndex);
   }
 
-  handlePageSizeChange(event: any): void {
-    this.pageSize = event.target.value;
-    this.pageNumber = 1;
-    this.fetchOffers();
-  }
-  onSortOptionChange(event: any): void {
-    this.sortBy = event.target.value;
-    this.fetchOffers();
+  onSortChange(event: any) {
+    this.sortBy = event.value;
+    this.fetchOffers().then(() => {
+      this.pages = Array(this.totalPages)
+        .fill(0)
+        .map((_, index) => index + 1);
+    });
   }
 }

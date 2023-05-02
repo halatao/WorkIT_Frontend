@@ -100,3 +100,6 @@ button.mat-raised-button {
 ::ng-deep .mat-form-field-label {
   color: whitesmoke !important;
 }
+.table-container {
+  background-color: #f2f2f2;
+}

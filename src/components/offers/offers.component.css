@@ -26,3 +26,15 @@
 .mt{
   margin-top: 20px;
 }
+.full-width-table {
+  width: 100%;
+}
+.table-container{
+  background-color: #2b323d;
+}
+::ng-deep .mat-header-cell {
+  color: whitesmoke;
+}
+
+
+

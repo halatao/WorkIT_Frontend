@@ -16,7 +16,9 @@ import { AuthComponent } from 'src/components/auth/auth.component';
 import { AccountComponent } from 'src/components/account/account.component';
 import { ProfileComponent } from 'src/components/profile/profile.component';
 import { WelcomeComponent } from '../components/welcome/welcome.component';
-import {UpdateOfferComponent} from "../components/update-offer/update-offer.component";
+import { UpdateOfferComponent } from '../components/update-offer/update-offer.component';
+import { MatPaginatorModule } from '@angular/material/paginator';
+import { MatTooltipModule } from '@angular/material/tooltip';
 
 @NgModule({
   declarations: [
@@ -29,7 +31,7 @@ import {UpdateOfferComponent} from "../components/update-offer/update-offer.comp
     AccountComponent,
     ProfileComponent,
     WelcomeComponent,
-    UpdateOfferComponent
+    UpdateOfferComponent,
   ],
   imports: [
     BrowserModule,
@@ -40,7 +42,10 @@ import {UpdateOfferComponent} from "../components/update-offer/update-offer.comp
     BrowserAnimationsModule,
     FormsModule,
     MaterialModule,
+    MatPaginatorModule,
+    MatTooltipModule,
   ],
+  exports: [MatPaginatorModule, MatTooltipModule],
   providers: [],
   bootstrap: [AppComponent],
 })
