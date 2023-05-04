@@ -28,6 +28,7 @@ export class OffersComponent implements OnInit {
     { value: 'date', label: 'Date' },
     { value: 'headline', label: 'Headline' },
   ];
+  searchTerm: string = '';
   public pages: number[] = [];
   displayedColumns: string[] = ['name', 'salary', 'location', 'actions'];
   displayedData: Offer[] = [];
@@ -51,10 +52,6 @@ export class OffersComponent implements OnInit {
         this.offers.data = this.offerService.getOffers();
         this.totalPages = res.totalPages;
 
-        console.log(this.totalPages);
-        console.log(this.pageNumber);
-        console.log(this.pages);
-
         const startIndex = 0;
         const endIndex = startIndex + this.pageSize;
         this.displayedData = this.offers.data.slice(startIndex, endIndex);
@@ -74,5 +71,12 @@ export class OffersComponent implements OnInit {
         .fill(0)
         .map((_, index) => index + 1);
     });
+  }
+
+  applyFilter() {
+    let data = this.offers.data.filter((offer) => {
+      return offer.name.toLowerCase().includes(this.searchTerm.toLowerCase());
+    });
+    this.displayedData = data;
   }
 }
